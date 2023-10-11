@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('insured_id');
+            $table->string('address_line1');
+            $table->string('address_line2')->nullable();
+            $table->string('town');
+            $table->string('county');
+            $table->string('eircode')->nullable();
+            $table->timestamps();
+
+            $table->foreign('insured_id')->references('id')->on('insureds')->onDelete('cascade');
+        });
+
+        Schema::table('insureds', function (Blueprint $table) {
+            $table->dropColumn('address');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('addresses');
+    }
+};

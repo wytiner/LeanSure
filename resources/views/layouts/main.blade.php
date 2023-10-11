@@ -6,23 +6,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LeanSure</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- plugins:css -->
     <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
+
     <!-- Layout styles -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 </head>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo" href="#">
@@ -70,7 +69,8 @@
                                 </div>
                                 <div
                                     class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cathy send you a message
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Wytiner send you a
+                                        message
                                     </h6>
                                     <p class="text-gray mb-0"> 1 Minutes ago </p>
                                 </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div
                                     class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Wytiner send you a
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cathy send you a
                                         message</h6>
                                     <p class="text-gray mb-0"> 15 Minutes ago </p>
                                 </div>
@@ -94,7 +94,8 @@
                                 </div>
                                 <div
                                     class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Michael created a new settlment
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Michael created a new
+                                        Claim
                                     </h6>
                                     <p class="text-gray mb-0"> 18 Minutes ago </p>
                                 </div>
@@ -123,8 +124,13 @@
                             <a class="dropdown-item" href="#">
                                 <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="mdi mdi-logout me-2 text-primary"></i> Signout
+                                </button>
+                            </form>
+
                         </div>
                     </li>
                 </ul>
@@ -136,7 +142,6 @@
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item nav-profile">
@@ -154,16 +159,28 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('home') }}">
                             <span class="menu-title">Dashboard</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
+
+
                     </li>
+                    {{-- Claims --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('claims.index') }}">
+                            <span class="menu-title">Claims</span>
+                            <i class="mdi mdi-security menu-icon"></i>
+                        </a>
+
+                    </li>
+
                     <li class="nav-item sidebar-actions">
                         <span class="nav-link">
                             <div class="border-bottom">
                             </div>
-                            <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ New Settlement</button>
+                            <a href="{{ route('claims.create') }}"
+                                class="btn btn-block btn-lg btn-gradient-primary mt-4">+ New Claim</a>
                         </span>
                     </li>
                 </ul>
@@ -171,13 +188,14 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                    @yield('content')
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
                         <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright Lean
-                            Dean© {{ now()->format('Y') }}</span>
+                            Dean © {{ now()->format('Y') }}</span>
                     </div>
                 </footer>
                 <!-- partial -->
@@ -189,16 +207,12 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
     <script src="/assets/js/off-canvas.js"></script>
     <script src="/assets/js/hoverable-collapse.js"></script>
     <script src="/assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
     <!-- End custom js for this page -->
+
+    @yield('scripts_after')
 </body>
 
 </html>

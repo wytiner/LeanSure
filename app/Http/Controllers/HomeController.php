@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Claim\Claim;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $claims = Claim::with(['insured', 'handler'])
+        ->orderBy('created_at', 'desc')
+        ->limit(5)->get();
+        return view('home', compact('claims'));
     }
 }
