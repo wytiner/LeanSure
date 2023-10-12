@@ -23,6 +23,11 @@ class Claim extends Model
         'claim_status',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function insured()
     {
         return $this->belongsTo(Insured::class);

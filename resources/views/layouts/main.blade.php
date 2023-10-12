@@ -117,7 +117,7 @@
                                 <span class="availability-status online"></span>
                             </div>
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">Ben Cuniffe</p>
+                                <p class="mb-1 text-black">{{ auth()->user()->name }}</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -152,10 +152,14 @@
                                 <!--change to offline or busy as needed-->
                             </div>
                             <div class="nav-profile-text d-flex flex-column">
-                                <span class="font-weight-bold mb-2">Ben Cuniffe</span>
+                                <span class="font-weight-bold mb-2">{{ auth()->user()->name  }}</span>
                                 <span class="text-secondary text-small">Project Manager</span>
                             </div>
-                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                            @if (auth()->user()->email_verified_at)
+                                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                            @else
+                            <i class="mdi mdi-bookmark-check text-danger nav-profile-badge" title="Email not verified"></i>
+                            @endif
                         </a>
                     </li>
                     <li class="nav-item">
@@ -206,6 +210,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="/assets/js/off-canvas.js"></script>
     <script src="/assets/js/hoverable-collapse.js"></script>

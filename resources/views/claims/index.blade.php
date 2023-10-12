@@ -32,6 +32,8 @@
                                         <th>Insured Name</th>
                                         <th>Handler Name</th>
                                         <th>Subject</th>
+                                        <th>Invoice Status</th>
+                                        <th>Claim Status</th>
                                         <th>AXA Claim ID</th>
                                         <th>Action</th>
                                     </tr>
@@ -42,6 +44,18 @@
                                             <td>{{ $claim->insured->name }}</td>
                                             <td>{{ $claim->handler->name }}</td>
                                             <td>{{ $claim->subject }}</td>
+                                            <td>
+                                                <label
+                                                    class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
+                                                    {{ $claim->invoice_status }}
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label
+                                                    class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">
+                                                    {{ $claim->claim_status }}
+                                                </label>
+                                            </td>
                                             <td>{{ $claim->axa_claim_id }}</td>
                                             <td>
                                                 <a href="{{ route('claims.show', $claim) }}"
@@ -51,6 +65,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -88,12 +103,25 @@
                     row.append('<td>' + data.insured.name + '</td>');
                     row.append('<td>' + data.handler.name + '</td>');
                     row.append('<td>' + data.subject + '</td>');
+
+                    var invoiceBadgeClass = data.invoice_status == 'Paid' ? 'badge-success' :
+                        (data.invoice_status == 'Issued / outstanding' ? 'badge-warning' :
+                            'badge-info');
+                    row.append('<td><label class="badge ' + invoiceBadgeClass + '">' + data
+                        .invoice_status + '</label></td>');
+
+                    var claimBadgeClass = data.claim_status == 'Complete' ? 'badge-success' :
+                        (data.claim_status == 'Cancelled' ? 'badge-danger' : 'badge-info');
+                    row.append('<td><label class="badge ' + claimBadgeClass + '">' + data
+                        .claim_status + '</label></td>');
+
                     row.append('<td>' + data.axa_claim_id + '</td>');
                     row.append('<td><a href="{{ url('claims') }}/' + data.id +
                         '" class="btn btn-primary">View</a></td>');
                     tbody.append(row);
                 });
             });
+
         });
     </script>
 @endsection

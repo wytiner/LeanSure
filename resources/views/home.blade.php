@@ -19,10 +19,8 @@
                 <div class="col-md-5 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Traffic Sources</h4>
-                            <canvas id="traffic-chart"></canvas>
-                            <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
-                            </div>
+                            <h4 class="card-title">Claims History</h4>
+                            <canvas id="claims-chart" width="400" height="200"></canvas>
                         </div>
                     </div>
                 </div>
@@ -50,18 +48,21 @@
                                                 <td> {{ $claim->insured->name }} </td>
                                                 <td> {{ $claim->subject }} </td>
                                                 <td>
-                                                    <label class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
+                                                    <label
+                                                        class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
                                                         {{ $claim->invoice_status }}
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <label class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">
+                                                    <label
+                                                        class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">
                                                         {{ $claim->claim_status }}
                                                     </label>
                                                 </td>
                                                 <td> {{ $claim->axa_claim_id }} </td>
                                                 <td>
-                                                    <a href="{{ route('claims.show', $claim) }}" class="btn btn-primary">View</a>
+                                                    <a href="{{ route('claims.show', $claim) }}"
+                                                        class="btn btn-primary">View</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -87,4 +88,44 @@
     <script src="/assets/js/dashboard.js"></script>
     <script src="/assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+
+    <script>
+        $(document).ready(function() {
+            var ctx = document.getElementById('claims-chart').getContext("2d");
+            var myChart;
+
+            function initializeChart(data) {
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data), // Assume que as chaves são as datas
+                        datasets: [{
+                            label: 'Claims',
+                            data: Object.values(data), // Assume que os valores são as contagens
+                            // ... outras opções ...
+                        }]
+                    },
+                    // ... outras opções ...
+                });
+            }
+
+            function updateChartData() {
+                $.get('/claims-chart-data', function(data) {
+                    myChart.data.labels = Object.keys(data);
+                    myChart.data.datasets[0].data = Object.values(data);
+                    myChart.update();
+                });
+            }
+
+            // Inicializar o gráfico quando a página for carregada
+            $.get('/claims-chart-data', function(data) {
+                initializeChart(data);
+            });
+
+            // Atualizar os dados do gráfico quando o botão for clicado
+            $('#update-button').click(function() {
+                updateChartData();
+            });
+        });
+    </script>
 @endsection

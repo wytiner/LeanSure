@@ -9,6 +9,7 @@ use App\Models\Claim\Insured;
 use App\Models\Claim\LossAdjuster;
 use App\Models\County;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClaimController extends Controller
 {
@@ -141,5 +142,29 @@ class ClaimController extends Controller
         $claim->handler;
         $claim->lossAdjuster;
         return response()->json($claim);
+    }
+
+    public function updateStatus(Request $request, Claim $claim)
+    {
+        $claim->claim_status = $request->input('status');
+        $claim->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function updateInvoiceStatus(Request $request, Claim $claim)
+    {
+        $claim->invoice_status = $request->input('invoice_status');
+        $claim->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function showChart()
+    {
+        $claimsData = Claim::selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, COUNT(*) as count")
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
+            ->get()
+            ->pluck('count', 'month');
+
+        return response()->json($claimsData);
     }
 }
