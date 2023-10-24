@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('handlers', function (Blueprint $table) {
+        Schema::create('scope_of_works', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->email('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('reference');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('handlers');
+        Schema::dropIfExists('scope_of_works');
     }
 };

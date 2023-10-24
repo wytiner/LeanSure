@@ -30,8 +30,6 @@
                                 <thead>
                                     <tr>
                                         <th>Insured Name</th>
-                                        <th>Handler Name</th>
-                                        <th>Subject</th>
                                         <th>Invoice Status</th>
                                         <th>Claim Status</th>
                                         <th>AXA Claim ID</th>
@@ -42,8 +40,6 @@
                                     @foreach ($claims as $claim)
                                         <tr>
                                             <td>{{ $claim->insured->name }}</td>
-                                            <td>{{ $claim->handler->name }}</td>
-                                            <td>{{ $claim->subject }}</td>
                                             <td>
                                                 <label
                                                     class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
@@ -101,7 +97,6 @@
                     tbody.empty();
                     var row = $('<tr>');
                     row.append('<td>' + data.insured.name + '</td>');
-                    row.append('<td>' + data.handler.name + '</td>');
                     row.append('<td>' + data.subject + '</td>');
 
                     var invoiceBadgeClass = data.invoice_status == 'Paid' ? 'badge-success' :

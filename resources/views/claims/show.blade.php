@@ -28,12 +28,19 @@
                     </div>
                 </div>
 
-                <!-- Handler Information -->
                 <div class="form-group row">
+                    {{-- summary --}}
                     <div class="col-6">
-                        <label for="handler_name">Handler Name</label>
-                        <p id="handler_name">{{ $claim->handler->name }}</p>
+                        <label for="summary">Summary</label>
+                        <p id="summary">{{ $claim->summary }}</p>
                     </div>
+
+                    {{-- subject --}}
+                    <div class="col-6">
+                        <label for="subject">Subject</label>
+                        <p id="subject">{{ $claim->subject }}</p>
+                    </div>
+
                 </div>
 
                 <!-- Invoice Status -->
@@ -44,18 +51,26 @@
                                 class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">{{ $claim->invoice_status }}</span>
                         </p>
                     </div>
-                </div>
 
-                <!-- Claim Status -->
-                <div class="form-group row">
                     <div class="col-6">
                         <label for="claim_status">Claim Status</label>
                         <p id="claim_status"><span
                                 class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">{{ $claim->claim_status }}</span>
                         </p>
                     </div>
-                    <div class="col-6">
+                </div>
 
+
+                <!-- Handler Information -->
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="handler_name">Handler Name</label>
+                        <p id="handler_name">{{ $claim->handler->name }}</p>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="handler_contact">Handler Contact</label>
+                        <p id="handler_contact">{{ $claim->handler->contact }}</p>
                     </div>
                 </div>
 

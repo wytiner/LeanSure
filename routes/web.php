@@ -27,4 +27,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/filter', [ClaimController::class, 'filter'])->name('filter');
     });
     Route::get('/claims-chart-data', [ClaimController::class, 'showChart'])->name('getChartData');
+
+    Route::get('/bruno', function () {
+        return view('bruno');
+    })->name('bruno');
 });
