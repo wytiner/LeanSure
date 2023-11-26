@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use CountiesTableSeeder;
+use Database\Seeders\CountiesTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
