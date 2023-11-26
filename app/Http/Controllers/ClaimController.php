@@ -8,6 +8,7 @@ use App\Models\Claim\Handler;
 use App\Models\Claim\Insured;
 use App\Models\Claim\LossAdjuster;
 use App\Models\County;
+use App\Models\ScopeOfWork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,8 +34,9 @@ class ClaimController extends Controller
     public function create()
     {
         $counties = County::all();
+        $scopeOfWorks = ScopeOfWork::all();
 
-        return view('claims.create', compact('counties'));
+        return view('claims.create', compact('counties', 'scopeOfWorks'));
     }
 
     /**

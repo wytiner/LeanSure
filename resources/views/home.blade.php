@@ -46,7 +46,7 @@
                                         @foreach ($claims as $claim)
                                             <tr>
                                                 <td> {{ $claim->insured->name }} </td>
-                                                <td> {{ $claim->subject }} </td>
+                                                <td> {{ $claim->scopeOfWork->description }} </td>
                                                 <td>
                                                     <label
                                                         class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
@@ -102,7 +102,6 @@
                         datasets: [{
                             label: 'Claims',
                             data: Object.values(data), // Assume que os valores são as contagens
-                            // ... outras opções ...
                         }]
                     },
                     // ... outras opções ...

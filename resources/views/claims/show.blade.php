@@ -6,14 +6,41 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-10">
-                        <h4 class="card-title">Claim Details</h4>
-                    </div>
-                    <div class="col-2">
                         <a href="{{ route('claims.index') }}" class="btn-sm btn-primary"><i
                                 class="mdi mdi-rotate-left">Back</i></a>
                     </div>
+                    <div class="col-2">
+                        <h4 class="card-title">Claim Details</h4>
+                    </div>
                 </div>
                 <p class="card-description"> AXA ID: {{ $claim->axa_claim_id }} </p>
+
+                <!-- Invoice Status -->
+                <div class="form-group row">
+
+                    <div class="col-4">
+                        <label for="claim_status">Claim Status</label>
+                        <p id="claim_status"><span
+                                class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">{{ $claim->claim_status }}</span>
+                        </p>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="attached_files">Attached Files</label>
+                        <p id="attached_files"><span
+                                class="badge badge-gradient-{{ $claim->files ? 'info' : 'danger' }}">{{ $claim->files ? $claim->files->count() : 0 }}</span>
+                        </p>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="invoice_status">Invoice Status</label>
+                        <p id="invoice_status"><span
+                                class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">{{ $claim->invoice_status }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <hr>
 
                 <!-- Insured Information -->
                 <div class="form-group row">
@@ -38,41 +65,59 @@
                     {{-- subject --}}
                     <div class="col-6">
                         <label for="subject">Subject</label>
-                        <p id="subject">{{ $claim->subject }}</p>
+                        <p id="subject">{{ $claim->scopeOfWork->description }}</p>
                     </div>
 
                 </div>
 
-                <!-- Invoice Status -->
+                {{-- date row  --}}
                 <div class="form-group row">
                     <div class="col-6">
-                        <label for="invoice_status">Invoice Status</label>
-                        <p id="invoice_status"><span
-                                class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">{{ $claim->invoice_status }}</span>
-                        </p>
+                        <label for="loss_date">Loss Date</label>
+                        <p id="loss_date">{{ now()->parse($claim->loss_date)->format('d/m/Y') }}</p>
                     </div>
 
                     <div class="col-6">
-                        <label for="claim_status">Claim Status</label>
-                        <p id="claim_status"><span
-                                class="badge badge-gradient-{{ $claim->claim_status == 'Complete' ? 'success' : ($claim->claim_status == 'Cancelled' ? 'danger' : 'info') }}">{{ $claim->claim_status }}</span>
-                        </p>
+                        <label for="incept_date">Incept Date</label>
+                        <p id="incept_date">{{ now()->parse($claim->incept_date)->format('d/m/Y') }}</p>
                     </div>
+
                 </div>
 
 
+
+                <hr>
                 <!-- Handler Information -->
                 <div class="form-group row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="handler_name">Handler Name</label>
                         <p id="handler_name">{{ $claim->handler->name }}</p>
                     </div>
 
-                    <div class="col-6">
-                        <label for="handler_contact">Handler Contact</label>
-                        <p id="handler_contact">{{ $claim->handler->contact }}</p>
+                    <div class="col-4">
+                        <label for="handler_contact">Handler Phone</label>
+                        <p id="handler_contact">{{ $claim->handler->phone }}</p>
                     </div>
+
+                    <div class="col-4">
+                        <label for="handler_email">Handler Email</label>
+                        <p id="handler_email">{{ $claim->handler->email }}</p>
+                    </div>
+
                 </div>
+
+                <hr>
+                {{-- excess and other info --}}
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label for="excess">Excess</label>
+                        <p id="excess">£{{ $claim->excess }}</p>
+                    </div>
+
+                    <div class="col-10">
+                        <label for="other_info">Other Information</label>
+                        <p id="other_info">{{ $claim->other_info }}</p>
+                    </div>
 
             </div>
         </div>

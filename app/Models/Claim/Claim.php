@@ -2,8 +2,11 @@
 
 namespace App\Models\Claim;
 
+use App\Models\ScopeOfWork;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Claim extends Model
 {
@@ -14,7 +17,7 @@ class Claim extends Model
         'axa_claim_id',
         'loss_date',
         'incept_date',
-        'subject',
+        'scope_id',
         'excess',
         'summary',
         'handler_id',
@@ -48,5 +51,8 @@ class Claim extends Model
         return $this->invoice_status === 'Paid';
     }
 
-
+    public function scopeOfWork(): BelongsTo
+    {
+        return $this->belongsTo(ScopeOfWork::class, 'scope_id');
+    }
 }
