@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                    <button type="reset" class="btn btn-light">Cancel</button>
+                    <a href="{{ route('claims.index') }}" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>
@@ -156,8 +156,6 @@
     <!-- Inicialização do Select2 -->
     <script>
         $(document).ready(function() {
-            $('#scope_id').select2({
-            });
         });
     </script>
 @endsection
