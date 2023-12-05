@@ -9,14 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => false]);
 
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->name('verification.notice');
-
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::resource('claims', ClaimController::class);
@@ -27,8 +22,4 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/filter', [ClaimController::class, 'filter'])->name('filter');
     });
     Route::get('/claims-chart-data', [ClaimController::class, 'showChart'])->name('getChartData');
-
-    Route::get('/bruno', function () {
-        return view('bruno');
-    })->name('bruno');
 });
