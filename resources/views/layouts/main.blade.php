@@ -15,9 +15,11 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -144,7 +146,54 @@
         <div class="container-fluid page-body-wrapper">
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item nav-profile">
+
+                    <div class="group text-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">
+                                <span class="menu-title">Dashboard</span>
+                                <i class="mdi mdi-home menu-icon"></i>
+                            </a>
+
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Projects</span>
+                                <i class="mdi mdi-security menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="{{ route('claims.index') }}">
+                                <span class="menu-title">Claims</span>
+                                <i class="mdi mdi-clipboard-account menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Emails</span>
+                                <i class="mdi mdi-email-outline menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Financials</span>
+                                <i class="mdi mdi-bank menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Invoice</span>
+                                <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Help</span>
+                                <i class="mdi mdi-help menu-icon"></i>
+                            </a>
+                        </li>
+                    </div>
+                    <li class="nav-item nav-profile" style="position: fixed; bottom: 0;">
                         <a href="#" class="nav-link">
                             <div class="nav-profile-image">
                                 <img src="/assets/images/faces/face1.jpg" alt="profile">
@@ -152,43 +201,20 @@
                                 <!--change to offline or busy as needed-->
                             </div>
                             <div class="nav-profile-text d-flex flex-column">
-                                <span class="font-weight-bold mb-2">{{ auth()->user()->name  }}</span>
+                                <span class="font-weight-bold mb-2">{{ auth()->user()->name }}</span>
                                 <span class="text-secondary text-small">Project Manager</span>
                             </div>
                             @if (auth()->user()->email_verified_at)
                                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                             @else
-                            <i class="mdi mdi-bookmark-check text-danger nav-profile-badge" title="Email not verified"></i>
+                                <i class="mdi mdi-bookmark-check text-danger nav-profile-badge"
+                                    title="Email not verified"></i>
                             @endif
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
-                            <span class="menu-title">Dashboard</span>
-                            <i class="mdi mdi-home menu-icon"></i>
-                        </a>
-
-
-                    </li>
-                    {{-- Claims --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('claims.index') }}">
-                            <span class="menu-title">Claims</span>
-                            <i class="mdi mdi-security menu-icon"></i>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item sidebar-actions">
-                        <span class="nav-link">
-                            <div class="border-bottom">
-                            </div>
-                            <a href="{{ route('claims.create') }}"
-                                class="btn btn-block btn-lg btn-gradient-primary mt-4">+ New Claim</a>
-                        </span>
-                    </li>
                 </ul>
             </nav>
+
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -198,7 +224,8 @@
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
-                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright Lean
+                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright
+                            Lean
                             Dean © {{ now()->format('Y') }}</span>
                     </div>
                 </footer>
@@ -211,13 +238,11 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="/assets/js/off-canvas.js"></script>
     <script src="/assets/js/hoverable-collapse.js"></script>
     <script src="/assets/js/misc.js"></script>
-    <!-- End custom js for this page -->
-
     @yield('scripts_after')
+
 </body>
 
 </html>

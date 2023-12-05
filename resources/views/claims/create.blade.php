@@ -42,8 +42,14 @@
 
                     <div class="form-group row">
                         <div class="col-7">
-                            <label for="subject">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                            <label for="scope_id">Scope</label>
+                            <select class="form-control form-control-lg" name="scope_id" id="scope_id" >
+                                @foreach ($scopeOfWorks as $scope)
+                                    <option value="{{ $scope->id }}"> {{ $scope->reference }} |
+                                        {{ $scope->description }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-5">
                             <!-- Claim Information -->
@@ -67,7 +73,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-gradient-primary text-white">£</span>
                                     </div>
-                                    <input type="number" id="excess" name="excess" class="form-control" aria-label="Amount (to the nearest Euro)">
+                                    <input type="number" id="excess" name="excess" class="form-control"
+                                        aria-label="Amount (to the nearest Euro)">
                                 </div>
                             </div>
                         </div>
@@ -143,4 +150,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts_after')
+    <!-- Inicialização do Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('#scope_id').select2({
+            });
+        });
+    </script>
 @endsection

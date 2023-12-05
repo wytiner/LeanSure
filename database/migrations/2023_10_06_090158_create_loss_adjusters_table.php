@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('loss_adjusters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('telephone')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
         });

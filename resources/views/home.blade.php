@@ -4,19 +4,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="row">
-                <div class="col-md-7 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <h4 class="card-title float-left">Visit And Sales Statistics</h4>
-                                <div id="visit-sale-chart-legend"
-                                    class="rounded-legend legend-horizontal legend-top-right float-right"></div>
-                            </div>
-                            <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 grid-margin stretch-card">
+                <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Claims History</h4>
@@ -31,22 +19,21 @@
                         <div class="card-body">
                             <h4 class="card-title">Recent Claims</h4>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-striped" id="claims_table">
                                     <thead>
                                         <tr>
-                                            <th> Insured Name </th>
-                                            <th> Subject </th>
-                                            <th> Invoice Status </th>
-                                            <th> Claim Status </th>
-                                            <th> AXA Claim ID </th>
-                                            <th> Action </th>
+                                            <th>AXA Claim ID</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Claim Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($claims as $claim)
                                             <tr>
-                                                <td> {{ $claim->insured->name }} </td>
-                                                <td> {{ $claim->scopeOfWork->description }} </td>
+                                                <td>{{ $claim->axa_claim_id }}</td>
+                                                <td>{{ $claim->insured->name }}</td>
                                                 <td>
                                                     <label
                                                         class="badge badge-gradient-{{ $claim->invoice_status == 'Paid' ? 'success' : ($claim->invoice_status == 'Issued / outstanding' ? 'warning' : 'info') }}">
@@ -59,7 +46,6 @@
                                                         {{ $claim->claim_status }}
                                                     </label>
                                                 </td>
-                                                <td> {{ $claim->axa_claim_id }} </td>
                                                 <td>
                                                     <a href="{{ route('claims.show', $claim) }}"
                                                         class="btn btn-primary">View</a>
@@ -91,6 +77,9 @@
 
     <script>
         $(document).ready(function() {
+            $('#claims_table').DataTable();
+
+
             var ctx = document.getElementById('claims-chart').getContext("2d");
             var myChart;
 

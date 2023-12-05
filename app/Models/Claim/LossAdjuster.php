@@ -9,7 +9,7 @@ class LossAdjuster extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'telephone', 'email'];
+    protected $fillable = ['name', 'phone', 'email'];
 
     public function claims()
     {
