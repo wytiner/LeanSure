@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 </head>
 
@@ -162,7 +164,7 @@
                                 <i class="mdi mdi-security menu-icon"></i>
                             </a>
                         </li>
-                        <li class="nav-item" >
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('claims.index') }}">
                                 <span class="menu-title">Claims</span>
                                 <i class="mdi mdi-clipboard-account menu-icon"></i>
