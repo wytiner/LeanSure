@@ -21,8 +21,9 @@
 
                                     <div class="col-12">
                                         <input id="email" type="email"
-                                            class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                                            class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            autofocus placeholder="Email">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -35,8 +36,8 @@
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <input id="password" type="password"
-                                            class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" placeholder="Password"
-                                            required autocomplete="current-password">
+                                            class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                            name="password" placeholder="Password" required autocomplete="current-password">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -46,19 +47,16 @@
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium">
+                                    <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium w-100">
                                         SIGN IN
                                     </button>
                                 </div>
-                                <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input" name="remember" id="remember"
-                                                {{ old('remember') ? 'checked' : '' }}> Keep me signed in
-                                        </label>
-                                    </div>
+                                <div class="text-center mt-4 font-weight-light">
                                     <a href="{{ route('password.request') }}" class="auth-link text-black">Forgot
                                         password?</a>
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
                                 </div>
                             </form>
                         </div>
