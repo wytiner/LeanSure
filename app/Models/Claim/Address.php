@@ -2,6 +2,7 @@
 
 namespace App\Models\Claim;
 
+use App\Models\County;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
