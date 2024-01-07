@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\DB;
 
 class ClaimController extends Controller
 {
+    protected $scopeOfWork;
+
+    public function __construct(
+        ScopeOfWork $scopeOfWork
+    ) {
+        $this->scopeOfWork = $scopeOfWork;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +44,7 @@ class ClaimController extends Controller
     public function create()
     {
         $counties = County::all();
-        $scopeOfWorks = ScopeOfWork::all();
+        $scopeOfWorks = $this->scopeOfWork->getScopeOfWorks();
 
         return view('claims.create', compact('counties', 'scopeOfWorks'));
     }
@@ -99,8 +109,10 @@ class ClaimController extends Controller
     public function show($id)
     {
         $claim = Claim::findOrFail($id);
+        $materials = $claim->scopeOfWork->getMaterials();
+        $scopeOfWorks = $this->scopeOfWork->getScopeOfWorks();
 
-        return view('claims.show', compact('claim'));
+        return view('claims.show', compact('claim', 'materials', 'scopeOfWorks'));
     }
 
     /**

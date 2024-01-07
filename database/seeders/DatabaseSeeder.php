@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountiesTableSeeder::class,
             ScopeOfWorkSeeder::class,
+            PerilTableSeeder::class,
         ]);
     }
 }

@@ -1,5 +1,6 @@
 @extends('layouts.main')
-
+@section('title') Claim Index
+@endsection
 
 @section('content')
     <style>
@@ -19,7 +20,7 @@
                         {{-- new claim buttom  --}}
                         <div class="col-6">
                             <a href="{{ route('home') }}" class="btn-sm btn-primary w-100"><i
-                                    class="mdi mdi-rotate-left">Back</i></a>f
+                                    class="mdi mdi-rotate-left">Back</i></a>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('claims.create') }}" class="btn-sm btn-primary w-100"><i

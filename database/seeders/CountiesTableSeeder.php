@@ -24,11 +24,13 @@ class CountiesTableSeeder extends Seeder
         ];
 
         foreach ($counties as $county) {
-            DB::table('counties')->insert([
-                'name' => $county,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            if (!DB::table('counties')->where('name', $county)->exists()) {
+                DB::table('counties')->insert([
+                    'name' => $county,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }

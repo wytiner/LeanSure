@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('title') New Claim
+@endsection
+
 @section('content')
     <div class="col-12 grid-margin stretch-card">
         <div class="card">

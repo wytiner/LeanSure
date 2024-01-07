@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('title') Claim {{ $claim->handler->name }}
+@endsection
+
 @section('content')
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -73,6 +76,10 @@
                                             <label for="summary">Summary</label>
                                             <p id="summary">{{ $claim->summary }}</p>
                                         </div>
+                                        <div class="col-12">
+                                            <label for="subject">Reference: {{ $claim->scopeOfWork->reference }}</label>
+                                            <p id="subject">Subject: {{ $claim->scopeOfWork->description }}</p>
+                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -98,7 +105,6 @@
                                         <div class="col-4">
                                             <label for="">Name</label>
                                             <p id="">{{ $claim->lossAdjuster->name }}</p>
-
                                         </div>
 
                                         <div class="col-4">

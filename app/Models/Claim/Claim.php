@@ -2,6 +2,7 @@
 
 namespace App\Models\Claim;
 
+use App\Models\Peril;
 use App\Models\ScopeOfWork;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,12 +25,18 @@ class Claim extends Model
         'loss_adjuster_id',
         'invoice_status',
         'claim_status',
+        'peril_id'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    public function peril()
+    {
+        return $this->belongsTo(Peril::class);
+    }
 
     public function insured()
     {

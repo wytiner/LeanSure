@@ -14,4 +14,15 @@ class ScopeOfWork extends Model
         'description',
     ];
 
+
+    public function getMaterials()
+    {
+        return $this->where('reference', 'like', 'M%')->get();
+    }
+
+    public function getScopeOfWorks()
+    {
+        return $this->where('reference', 'not like', 'M%')->get();
+    }
+
 }
